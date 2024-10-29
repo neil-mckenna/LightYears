@@ -1,11 +1,14 @@
 #include <iostream>
-using namespace	std;
+#include <SFML/Graphics.hpp>
 
+using namespace	std;
+using namespace sf;
 
 int main()
 {
-	cout << "Hello World!" << endl;
+	RenderWindow renderWindow{VideoMode(1024,768), "MyWindow"};
+
 	cin.get();
+
 	return 0;
 }
-	
