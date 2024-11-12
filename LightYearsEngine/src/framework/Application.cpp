@@ -1,5 +1,7 @@
 #include <iostream>
 #include "framework/Application.h"
+#include "framework/Core.h"
+
 
 using namespace sf;
 using namespace std;
@@ -44,7 +46,8 @@ namespace ly
 				UpdateInternal(targetDeltaTime);
 				RenderInternal();
 			}
-			//cout << "Updating at framerate: " << 1.f /frameDeltaTime << endl;
+
+			LOG("Updating frame rate at %f", 1.f /frameDeltaTime);
 		}
 	}
 
