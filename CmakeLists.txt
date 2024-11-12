@@ -11,10 +11,12 @@ set(CMAKE_CXX_EXTENSIONS 		OFF)
 
 
 # create a variable for title name.
+set(LIGHT_YEARS_ENGINE_TARGET_NAME LightYearsEngine)
 set(LIGHT_YEARS_GAME_TARGET_NAME LightYearsGame)
 
-# this call this cmakelist beside the src files !!! inside the otehr cmakelist there is the target linkers
-add_subdirectory(LightYears)
+# this call this cmakelist beside the src files !!! inside the other cmakelist there is the target linkers
+add_subdirectory(LightYearsEngine)
+add_subdirectory(LightYearsGame)
 
 
 

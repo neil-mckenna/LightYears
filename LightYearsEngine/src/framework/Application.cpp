@@ -41,22 +41,29 @@ namespace ly
 			while (accumlatedTime > targetDeltaTime)
 			{
 				accumlatedTime -= targetDeltaTime;
-				Update(targetDeltaTime);
-				Render();
+				UpdateInternal(targetDeltaTime);
+				RenderInternal();
 			}
 			//cout << "Updating at framerate: " << 1.f /frameDeltaTime << endl;
 		}
 	}
 
-	void Application::Update(float dt)
+	void Application::RenderInternal()
 	{
+		m_Window.clear();
 
+		Render();
+
+		m_Window.display();
+	}
+
+	void Application::UpdateInternal(float dt)
+	{
+		Application::Update(dt);
 	}
 
 	void Application::Render()
 	{
-		m_Window.clear();
-
 		RectangleShape rect{ Vector2f{100,100} };
 		rect.setOrigin(50.0f, 50.0f);
 		rect.setFillColor(Color::Green);
@@ -65,8 +72,11 @@ namespace ly
 
 		m_Window.draw(rect);
 
-		m_Window.display();
 	}
 
+	void Application::Update(float dt)
+	{
+
+	}
 }
 

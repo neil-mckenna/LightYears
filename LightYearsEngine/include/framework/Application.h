@@ -17,8 +17,10 @@ namespace ly
 		float m_TargetFrameRate;
 		Clock m_TickClock;
 
-		void Update(float dt);
-		void Render();
+		void UpdateInternal(float dt);
+		virtual void Update(float dt);
+		void RenderInternal();
+		virtual void Render();
 
 	};
 

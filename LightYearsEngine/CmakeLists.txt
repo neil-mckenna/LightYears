@@ -1,15 +1,17 @@
-add_executable(${LIGHT_YEARS_GAME_TARGET_NAME}
-	${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
+add_library(${LIGHT_YEARS_ENGINE_TARGET_NAME} STATIC
+
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/Application.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/Application.cpp
+
+	${CMAKE_CURRENT_SOURCE_DIR}/include/EntryPoint.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/EntryPoint.cpp
 
 )
 
 # add custom include for headers
-target_include_directories(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-
-
+target_include_directories(${LIGHT_YEARS_ENGINE_TARGET_NAME}
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
 
 include(FetchContent)
@@ -29,12 +31,12 @@ FetchContent_Declare(
 	GIT_SHALLOW FALSE
 )
 
-target_link_libraries(
-	${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC ${SFML_LIBRARY_INCLUDES}
-)
-
 #FetchContent_MakeAvailable(${SFML_LIBRARY_NAME})
 FetchContent_MakeAvailable(SFML)
+
+target_link_libraries(
+	${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC ${SFML_LIBRARY_INCLUDES}
+)
 
 # box2d
 set(BOX2D_LIBRARY_NAME Box2D)
@@ -47,8 +49,9 @@ FetchContent_Declare(
 )
 
 FetchContent_MakeAvailable(${BOX2D_LIBRARY_NAME})
+
 target_link_libraries(
-	${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC box2d
+	${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC box2d
 )
 
 function(CopyLibToTarget LIB_NAME TARGET_NAME)
@@ -62,12 +65,12 @@ endfunction()
 
 
 # Copy each SFML library after build
-CopyLibToTarget(sfml-graphics ${LIGHT_YEARS_GAME_TARGET_NAME})
-CopyLibToTarget(sfml-window ${LIGHT_YEARS_GAME_TARGET_NAME})
-CopyLibToTarget(sfml-system ${LIGHT_YEARS_GAME_TARGET_NAME})
-CopyLibToTarget(sfml-audio ${LIGHT_YEARS_GAME_TARGET_NAME})
-CopyLibToTarget(sfml-network ${LIGHT_YEARS_GAME_TARGET_NAME})
+CopyLibToTarget(sfml-graphics ${LIGHT_YEARS_ENGINE_TARGET_NAME})
+CopyLibToTarget(sfml-window ${LIGHT_YEARS_ENGINE_TARGET_NAME})
+CopyLibToTarget(sfml-system ${LIGHT_YEARS_ENGINE_TARGET_NAME})
+CopyLibToTarget(sfml-audio ${LIGHT_YEARS_ENGINE_TARGET_NAME})
+CopyLibToTarget(sfml-network ${LIGHT_YEARS_ENGINE_TARGET_NAME})
 
-CopyLibToTarget(box2d ${LIGHT_YEARS_GAME_TARGET_NAME})
+CopyLibToTarget(box2d ${LIGHT_YEARS_ENGINE_TARGET_NAME})
 
 
