@@ -9,6 +9,7 @@ namespace ly
 	{
 	public:
 		GameApplication();
+
 	};
 
 }

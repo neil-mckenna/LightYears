@@ -1,6 +1,7 @@
 #include <iostream>
 #include "framework/Application.h"
 #include "framework/Core.h"
+#include "framework/World.h"
 
 
 using namespace sf;
@@ -16,9 +17,10 @@ namespace ly
 	Application::Application() :
 		m_Window{ VideoMode(GAMEWIDTH, GAMEHEIGHT), "LightYearsGame" },
 		m_TargetFrameRate{60.0f},
-		m_TickClock{}
+		m_TickClock{},
+		m_currentWorld{nullptr}
 	{
-
+		//LOG("Application created");
 	}
 
 	void Application::Run()
@@ -47,8 +49,10 @@ namespace ly
 				RenderInternal();
 			}
 
-			LOG("Updating frame rate at %f", 1.f /frameDeltaTime);
+			//LOG("Updating frame rate at %f", 1.f /frameDeltaTime);
 		}
+
+
 	}
 
 	void Application::RenderInternal()
@@ -62,7 +66,20 @@ namespace ly
 
 	void Application::UpdateInternal(float dt)
 	{
+
 		Application::Update(dt);
+
+
+		if (m_currentWorld)
+		{
+			m_currentWorld->BeginPlayInternal();
+			m_currentWorld->UpdateInternal(dt);
+		}
+		else
+		{
+			LOG("No current world");
+		}
+
 	}
 
 	void Application::Render()
