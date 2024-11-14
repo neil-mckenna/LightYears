@@ -1,6 +1,7 @@
 #include "gameFramework/GameApplication.h"
 #include "framework/World.h"
 #include "framework/Actor.h"
+#include "config.h"
 
 
 ly::Application* GetApplication()
@@ -20,7 +21,7 @@ namespace ly
 		newWorld.lock()->SpawnActor<Actor>();
 		actorToDestroy = newWorld.lock()->SpawnActor<Actor>();
 
-		actorToDestroy.lock()->SetTexture("C:/Users/jakes/source/repos/LightYears/LightYearsGame/assets/SpaceShooterRedux/PNG/ufoBlue.png");
+		actorToDestroy.lock()->SetTexture(GetResourceDir() + "SpaceShooterRedux/PNG/ufoBlue.png");
 
 		counter = 0;
 
