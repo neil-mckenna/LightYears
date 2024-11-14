@@ -1,5 +1,6 @@
 #include <iostream>
 #include "framework/Application.h"
+
 #include "framework/Core.h"
 #include "framework/World.h"
 
@@ -13,14 +14,16 @@ const int GAMEHEIGHT = 1024;
 namespace ly
 {
 
-	// Application constructor with default settings
-	Application::Application() :
-		m_Window{ VideoMode(GAMEWIDTH, GAMEHEIGHT), "LightYearsGame" },
-		m_TargetFrameRate{60.0f},
+	Application::Application(unsigned int windowWidth, unsigned int windowHeight,
+		const std::string& title, sf::Uint32 style
+
+	) :
+		m_Window{ sf::VideoMode(windowWidth, windowHeight),  title, style },
+		m_TargetFrameRate{ 60.f },
 		m_TickClock{},
-		m_currentWorld{nullptr}
+		m_currentWorld{ nullptr }
 	{
-		//LOG("Application created");
+
 	}
 
 	void Application::Run()
@@ -67,8 +70,7 @@ namespace ly
 	void Application::UpdateInternal(float dt)
 	{
 
-		Application::Update(dt);
-
+		Update(dt);
 
 		if (m_currentWorld)
 		{

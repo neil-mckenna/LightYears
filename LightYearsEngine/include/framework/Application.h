@@ -4,6 +4,7 @@
 #include "framework/Core.h"
 
 using namespace sf;
+using namespace std;
 
 namespace ly
 {
@@ -12,11 +13,19 @@ namespace ly
 	class Application
 	{
 	public:
-		Application();
+		Application(
+			unsigned int windowWidth,
+			unsigned int windowHeight,
+			const std::string& title,
+			sf::Uint32 style);
+
 		void Run();
 
 		template<typename WorldType>
 		weak<WorldType> LoadWorld();
+
+	protected:
+		virtual void Update(float dt);
 
 
 	private:
@@ -26,7 +35,7 @@ namespace ly
 		shared<World> m_currentWorld;
 
 		void UpdateInternal(float dt);
-		virtual void Update(float dt);
+
 		void RenderInternal();
 		virtual void Render();
 

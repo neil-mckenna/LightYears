@@ -38,11 +38,18 @@ namespace ly
 
 		m_pendingActors.clear();
 
-		LOG("Actor size()  %d", m_Actors.size());
-		for (shared<Actor> actor : m_Actors)
-		{
 
-			actor->Update(dt);
+		for (auto iter = m_Actors.begin(); iter != m_Actors.end();)
+		{
+			if (iter->get()->IsPendingDestroy())
+			{
+				iter = m_Actors.erase(iter);
+			}
+			else
+			{
+				iter->get()->Update(dt);
+				++iter;
+			}
 		}
 
 		Update(dt);
@@ -56,7 +63,8 @@ namespace ly
 
 	void World::Update(float dt)
 	{
-		LOG("Updating at framerate %f", 1.f / dt);
+		//LOG("Updating at framerate %f", 1.f / dt);
+		LOG("Actors count %zu" , m_Actors.size());
 	}
 
 	World::~World()

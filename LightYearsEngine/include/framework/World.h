@@ -19,7 +19,7 @@ namespace ly
 		virtual ~World();
 
 		template<typename ActorType>
-		weak<ActorType> SpawnActor();
+		shared<ActorType> SpawnActor();
 
 	private:
 		Application* m_owningApp;
@@ -34,13 +34,20 @@ namespace ly
 	};
 
 	template<typename ActorType>
-	weak<ActorType> World::SpawnActor()
+	shared<ActorType> World::SpawnActor()
 	{
-		shared<ActorType> newActor{ new ActorType{ this } };
+		// Create a new shared pointer of ActorType and initialize it with this world as the owner
+		shared<ActorType> newActor = std::make_shared<ActorType>(this);
+
+		// Add the new actor to the pending actors list
 		m_pendingActors.push_back(newActor);
+
 		LOG("Actor Spawned");
-		return weak<ActorType>();
+
+		// Return the shared pointer, allowing the caller to manage its lifetime directly
+		return newActor;
 	}
+
 
 
 }

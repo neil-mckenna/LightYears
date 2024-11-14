@@ -28,11 +28,12 @@ namespace ly
 
 	void Actor::Update(float dt)
 	{
-		LOG("Actor updating");
+		//LOG("Actor updating");
 
 	}
 	Actor::~Actor()
 	{
+		LOG("Ahhhhhh!!!! ------------ Actor Destroyed");
 	}
 }
 
