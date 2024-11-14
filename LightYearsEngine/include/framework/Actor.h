@@ -26,6 +26,20 @@ namespace ly
 
 		void Render(RenderWindow &window);
 
+		void SetActorLocation(const Vector2f& newLocation);
+		void SetActorRotation(float newRot);
+
+		Vector2f GetActorLocation() const;
+		float GetActorRotation() const;
+
+		void AddActorLocationOffset(const Vector2f& offsetAmt);
+		void AddActorLocationOffset(float rotOffsetAmt);
+
+		Vector2f GetActorForwardDirection() const;
+		Vector2f GetActorRightDirection() const;
+
+		void RescaleActor(float scaleXAmt, float scaleYAmt);
+
 		// destructor
 		virtual ~Actor();
 
@@ -34,7 +48,9 @@ namespace ly
 		bool m_hasBeganPlay;
 
 		Sprite m_Sprite;
-		Texture m_Texture;
+		shared<Texture> m_Texture;
+
+		void CenterPivot();
 	};
 
 

@@ -3,6 +3,7 @@
 
 #include "framework/Core.h"
 #include "framework/World.h"
+#include "framework/AssetManager.h"
 
 
 using namespace sf;
@@ -21,7 +22,9 @@ namespace ly
 		m_Window{ sf::VideoMode(windowWidth, windowHeight),  title, style },
 		m_TargetFrameRate{ 60.f },
 		m_TickClock{},
-		m_currentWorld{ nullptr }
+		m_currentWorld{ nullptr },
+		m_CleanCycleClock{},
+		m_CleanCycleInterval{2.f}
 	{
 
 	}
@@ -53,9 +56,10 @@ namespace ly
 			}
 
 			//LOG("Updating frame rate at %f", 1.f /frameDeltaTime);
+
+
+
 		}
-
-
 	}
 
 	void Application::RenderInternal()
@@ -80,6 +84,14 @@ namespace ly
 		else
 		{
 			LOG("No current world");
+		}
+
+		if (m_CleanCycleClock.getElapsedTime().asSeconds() >= m_CleanCycleInterval)
+		{
+			// garbage collection
+			m_CleanCycleClock.restart();
+			AssetManager::Get().CleanCycle();
+
 		}
 
 	}

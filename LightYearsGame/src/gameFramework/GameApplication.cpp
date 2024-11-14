@@ -21,7 +21,10 @@ namespace ly
 		newWorld.lock()->SpawnActor<Actor>();
 		actorToDestroy = newWorld.lock()->SpawnActor<Actor>();
 
-		actorToDestroy.lock()->SetTexture(GetResourceDir() + "SpaceShooterRedux/PNG/ufoBlue.png");
+		actorToDestroy.lock()->SetTexture(GetResourceDir() + "SpaceShooterRedux/PNG/playerShip1_blue.png");
+		actorToDestroy.lock()->SetActorLocation(Vector2f(400.f, 490.f));
+		actorToDestroy.lock()->SetActorRotation(90.0f);
+		actorToDestroy.lock()->RescaleActor(1.0f, 1.7f);
 
 		counter = 0;
 
@@ -34,14 +37,14 @@ namespace ly
 		//LOG("GAME APPlication updating counter: %f", counter);
 
 
-		if (counter > 2.f)
+		/*if (counter > 2.f)
 		{
 			if (!actorToDestroy.expired())
 			{
 				LOG("Destroy the actor");
 				actorToDestroy.lock()->Destroy();
 			}
-		}
+		}*/
 	}
 
 

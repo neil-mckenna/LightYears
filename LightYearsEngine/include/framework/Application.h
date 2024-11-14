@@ -34,6 +34,9 @@ namespace ly
 		Clock m_TickClock;
 		shared<World> m_currentWorld;
 
+		Clock m_CleanCycleClock;
+		float m_CleanCycleInterval;
+
 		void UpdateInternal(float dt);
 
 		void RenderInternal();
