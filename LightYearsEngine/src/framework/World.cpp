@@ -47,12 +47,22 @@ namespace ly
 			}
 			else
 			{
-				iter->get()->Update(dt);
+				iter->get()->UpdateInternal(dt);
 				++iter;
 			}
 		}
 
 		Update(dt);
+	}
+
+	void World::Render(RenderWindow& window)
+	{
+		for (auto& actor : m_Actors)
+		{
+			actor->Render(window);
+		}
+
+
 	}
 
 
@@ -64,7 +74,7 @@ namespace ly
 	void World::Update(float dt)
 	{
 		//LOG("Updating at framerate %f", 1.f / dt);
-		LOG("Actors count %zu" , m_Actors.size());
+		//LOG("Actors count %zu" , m_Actors.size());
 	}
 
 	World::~World()

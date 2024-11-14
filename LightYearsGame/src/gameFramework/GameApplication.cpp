@@ -19,6 +19,9 @@ namespace ly
 		weak<World> newWorld = LoadWorld<World>();
 		newWorld.lock()->SpawnActor<Actor>();
 		actorToDestroy = newWorld.lock()->SpawnActor<Actor>();
+
+		actorToDestroy.lock()->SetTexture("C:/Users/jakes/source/repos/LightYears/LightYearsGame/assets/SpaceShooterRedux/PNG/ufoBlue.png");
+
 		counter = 0;
 
 	}

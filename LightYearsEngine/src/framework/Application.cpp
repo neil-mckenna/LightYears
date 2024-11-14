@@ -86,13 +86,10 @@ namespace ly
 
 	void Application::Render()
 	{
-		RectangleShape rect{ Vector2f{100,100} };
-		rect.setOrigin(50.0f, 50.0f);
-		rect.setFillColor(Color::Green);
-		rect.setPosition(GAMEWIDTH / 2, GAMEHEIGHT - 70.0f);
-
-
-		m_Window.draw(rect);
+		if (m_currentWorld)
+		{
+			m_currentWorld->Render(m_Window);
+		}
 
 	}
 

@@ -2,6 +2,7 @@
 
 #include "framework/Actor.h"
 #include "framework/Core.h"
+#include <SFML/Graphics.hpp>
 
 namespace ly
 {
@@ -15,7 +16,9 @@ namespace ly
 
 		void BeginPlayInternal();
 		void UpdateInternal(float dt);
+		void Render(RenderWindow& window);
 
+		// destructor
 		virtual ~World();
 
 		template<typename ActorType>
