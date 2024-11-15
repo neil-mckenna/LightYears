@@ -2,6 +2,7 @@
 #include "framework/Core.h"
 #include "framework/AssetManager.h"
 #include "framework/MathUtility.h"
+#include "framework/World.h"
 
 namespace ly
 {
@@ -119,7 +120,18 @@ namespace ly
 		m_Sprite.setScale(scaleXAmt, scaleYAmt);
 	}
 
+	Vector2u Actor::GetWindowSize() const
+	{
+		return m_owningWorld->GetWindowSize();
+	}
 
+	Vector2f Actor::GetActorSpriteSize() const
+	{
+		float width = m_Sprite.getGlobalBounds().width;
+		float height = m_Sprite.getGlobalBounds().height;
+
+		return Vector2f(width, height);
+	}
 
 	void Actor::CenterPivot()
 	{

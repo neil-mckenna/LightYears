@@ -15,6 +15,7 @@ namespace ly
 
 		shared<Texture> LoadTexture(const string& path);
 		void CleanCycle();
+		void SetAssetRootDirectory(const string& directory);
 
 	protected:
 		AssetManager();
@@ -22,6 +23,8 @@ namespace ly
 	private:
 		static unique<AssetManager> assetManager;
 		Dictionary<string, shared<Texture>> m_LoadedTextureMap;
+
+		string m_rootDirectory;
 	};
 
 

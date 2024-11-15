@@ -24,6 +24,11 @@ namespace ly
 		template<typename WorldType>
 		weak<WorldType> LoadWorld();
 
+		Vector2u GetWindowSize() const
+		{
+			return m_Window.getSize();
+		}
+
 	protected:
 		virtual void Update(float dt);
 

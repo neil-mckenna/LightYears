@@ -24,6 +24,8 @@ namespace ly
 		template<typename ActorType>
 		shared<ActorType> SpawnActor();
 
+		Vector2u GetWindowSize() const;
+
 	private:
 		Application* m_owningApp;
 		bool m_BeginPlay;

@@ -40,6 +40,10 @@ namespace ly
 
 		void RescaleActor(float scaleXAmt, float scaleYAmt);
 
+		Vector2u GetWindowSize() const;
+
+		Vector2f GetActorSpriteSize() const;
+
 		// destructor
 		virtual ~Actor();
 

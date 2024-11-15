@@ -20,7 +20,7 @@ namespace ly
 	}
 
 	// constructor
-	AssetManager::AssetManager()
+	AssetManager::AssetManager() : m_rootDirectory{""}
 	{
 	}
 
@@ -35,7 +35,7 @@ namespace ly
 
 		shared<Texture> newTexture{ new Texture };
 		// return a texture
-		if (newTexture->loadFromFile(path))
+		if (newTexture->loadFromFile(m_rootDirectory + path))
 		{
 			m_LoadedTextureMap.insert({ path, newTexture });
 			return newTexture;
@@ -58,6 +58,12 @@ namespace ly
 				++iter;
 			}
 		}
+	}
+
+	void AssetManager::SetAssetRootDirectory(const string& directory)
+	{
+		m_rootDirectory = directory;
+
 	}
 }
 

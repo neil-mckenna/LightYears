@@ -1,6 +1,7 @@
 #include "framework/World.h"
 #include "framework/Core.h"
 #include "framework/Actor.h"
+#include "framework/Application.h"
 
 namespace ly
 {
@@ -77,7 +78,13 @@ namespace ly
 		//LOG("Actors count %zu" , m_Actors.size());
 	}
 
+	Vector2u World::GetWindowSize() const
+	{
+		return m_owningApp->GetWindowSize();
+	}
+
 	World::~World()
 	{
+
 	}
 }

@@ -1,8 +1,8 @@
 #include "gameFramework/GameApplication.h"
 #include "framework/World.h"
-#include "framework/Actor.h"
+#include "framework/AssetManager.h"
+#include "player/PlayerSpaceship.h"
 #include "config.h"
-
 
 ly::Application* GetApplication()
 {
@@ -16,15 +16,17 @@ namespace ly
 	GameApplication::GameApplication()
 		: Application{800, 980, "LightYears", Style::Titlebar | Style::Close}
 	{
+		AssetManager::Get().SetAssetRootDirectory(GetResourceDir());
+
 		LOG("GAME APPlication called");
 		weak<World> newWorld = LoadWorld<World>();
-		newWorld.lock()->SpawnActor<Actor>();
-		actorToDestroy = newWorld.lock()->SpawnActor<Actor>();
+		//newWorld.lock()->SpawnActor<Actor>();
 
-		actorToDestroy.lock()->SetTexture(GetResourceDir() + "SpaceShooterRedux/PNG/playerShip1_blue.png");
-		actorToDestroy.lock()->SetActorLocation(Vector2f(400.f, 490.f));
-		actorToDestroy.lock()->SetActorRotation(90.0f);
-		actorToDestroy.lock()->RescaleActor(1.0f, 1.7f);
+		testPlayerSpaceship = newWorld.lock()->SpawnActor<PlayerSpaceship>();
+		testPlayerSpaceship.lock()->SetActorLocation(Vector2f(400.f, 490.f));
+		testPlayerSpaceship.lock()->SetActorRotation(0.0f);
+		testPlayerSpaceship.lock()->SetVelocity(Vector2f(0.0f, -200.f));
+		//testPlayerSpaceship.lock()->RescaleActor(1.0f, 1.0f);
 
 		counter = 0;
 
