@@ -79,25 +79,25 @@ namespace ly
 		// just to get sprite size
 		//LOG("Actor Size %f %f", GetActorSpriteSize().x, GetActorSpriteSize().y);
 
-		if (actorLocation.x < 0 + (GetActorSpriteSize().x / 2)
+		if (actorLocation.x < 0 + (GetActorGlobalBounds().width / 2)
 			&& m_MoveInput.x == -1)
 		{
 			m_MoveInput.x = 0;
 		}
 
-		if (actorLocation.x > GetWindowSize().x - (GetActorSpriteSize().x / 2)
+		if (actorLocation.x > GetWindowSize().x - (GetActorGlobalBounds().width / 2)
 			&& m_MoveInput.x == 1.0f)
 		{
 			m_MoveInput.x = 0;
 		}
 
-		if (actorLocation.y < 0 + (GetActorSpriteSize().y / 2)
+		if (actorLocation.y < 0 + (GetActorGlobalBounds().height / 2)
 			&& m_MoveInput.y == -1)
 		{
 			m_MoveInput.y = 0;
 		}
 
-		if (actorLocation.y > GetWindowSize().y - (GetActorSpriteSize().y / 2)
+		if (actorLocation.y > GetWindowSize().y - (GetActorGlobalBounds().height / 2)
 			&& m_MoveInput.y == 1.0f)
 		{
 			m_MoveInput.y = 0;

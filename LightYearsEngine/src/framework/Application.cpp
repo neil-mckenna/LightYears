@@ -91,6 +91,10 @@ namespace ly
 			// garbage collection
 			m_CleanCycleClock.restart();
 			AssetManager::Get().CleanCycle();
+			if (m_currentWorld)
+			{
+				m_currentWorld->CleanCycle();
+			}
 
 		}
 

@@ -51,7 +51,7 @@ namespace ly
 
 	void Actor::BeginPlay()
 	{
-		LOG("Actor begin play");
+		LOG("Actor	: %s :	Created!", m_ActorName.c_str());
 
 	}
 
@@ -125,12 +125,9 @@ namespace ly
 		return m_owningWorld->GetWindowSize();
 	}
 
-	Vector2f Actor::GetActorSpriteSize() const
+	FloatRect Actor::GetActorGlobalBounds() const
 	{
-		float width = m_Sprite.getGlobalBounds().width;
-		float height = m_Sprite.getGlobalBounds().height;
-
-		return Vector2f(width, height);
+		return m_Sprite.getGlobalBounds();
 	}
 
 	void Actor::SetSpriteRotation(float newRot) {
@@ -150,9 +147,36 @@ namespace ly
 
 	}
 
+	bool Actor::IsActorOutOfWindowBounds() const
+	{
+		float windowWidth = GetWorld()->GetWindowSize().x;
+		float windowHeight = GetWorld()->GetWindowSize().y;
+
+		float actorWidth = GetActorGlobalBounds().width;
+		float actorHeight = GetActorGlobalBounds().height;
+
+		Vector2f actorPos = GetActorLocation();
+
+		//LOG("Current Actor Pos x=%f y=%f", GetActorLocation().x, GetActorLocation().y);
+
+		// outside the x axises
+		if (actorPos.x < -actorWidth || actorPos.x > (windowWidth + actorWidth))
+		{
+			return true;
+		}
+
+		// outside the y axises
+		if (actorPos.y < -actorHeight || actorPos.y >(windowHeight + actorHeight))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 	Actor::~Actor()
 	{
-		LOG("Ahhhhhh!!!! ------------ Actor Destroyed");
+		LOG("Ahhhhhh!!!! ------------ Actor %s Destroyed", m_ActorName.c_str());
 	}
 }
 

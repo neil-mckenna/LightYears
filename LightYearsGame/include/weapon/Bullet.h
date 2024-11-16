@@ -29,6 +29,8 @@ namespace ly
 
 		void Move(float dt);
 
+		string GenerateRandomName(const string& baseName);
+
 	};
 
 }

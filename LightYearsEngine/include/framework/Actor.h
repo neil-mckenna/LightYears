@@ -16,6 +16,8 @@ namespace ly
 	public:
 		Actor(World* owningWorld, const string &texturePath = "");
 
+		string m_ActorName = "";
+
 		virtual void BeginPlay();
 		void BeginPlayInternal();
 
@@ -42,7 +44,7 @@ namespace ly
 
 		Vector2u GetWindowSize() const;
 
-		Vector2f GetActorSpriteSize() const;
+		FloatRect GetActorGlobalBounds() const;
 
 		// new functions
 		void SetSpriteRotation(float newRot);
@@ -50,12 +52,16 @@ namespace ly
 
 		World* GetWorld() const { return m_owningWorld; }
 
+		bool IsActorOutOfWindowBounds() const;
+
 		// destructor
 		virtual ~Actor();
 
 	private:
 		World* m_owningWorld;
 		bool m_hasBeganPlay;
+
+
 
 		float m_ActorRotation = 0.0f;
 		Sprite m_Sprite;

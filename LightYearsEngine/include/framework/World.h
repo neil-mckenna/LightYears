@@ -26,6 +26,8 @@ namespace ly
 
 		Vector2u GetWindowSize() const;
 
+		void CleanCycle();
+
 	private:
 		Application* m_owningApp;
 		bool m_BeginPlay;
@@ -47,7 +49,7 @@ namespace ly
 		// Add the new actor to the pending actors list
 		m_pendingActors.push_back(newActor);
 
-		LOG("Actor Spawned");
+		//LOG("Actor Spawned");
 
 		// Return the shared pointer, allowing the caller to manage its lifetime directly
 		return newActor;

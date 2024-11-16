@@ -31,7 +31,7 @@ namespace ly
 		//LOG("Pending Actors size()  %d", m_pendingActors.size());
 		for (shared<Actor> actor : m_pendingActors)
 		{
-			LOG("Pending Actor added to Actors");
+			//LOG("Pending Actor added to Actors");
 			m_Actors.push_back(actor);
 
 			actor->BeginPlayInternal();
@@ -42,15 +42,9 @@ namespace ly
 
 		for (auto iter = m_Actors.begin(); iter != m_Actors.end();)
 		{
-			if (iter->get()->IsPendingDestroy())
-			{
-				iter = m_Actors.erase(iter);
-			}
-			else
-			{
-				iter->get()->UpdateInternal(dt);
-				++iter;
-			}
+			iter->get()->UpdateInternal(dt);
+			++iter;
+
 		}
 
 		Update(dt);
@@ -81,6 +75,23 @@ namespace ly
 	Vector2u World::GetWindowSize() const
 	{
 		return m_owningApp->GetWindowSize();
+	}
+
+	void World::CleanCycle()
+	{
+		for (auto iter = m_Actors.begin(); iter != m_Actors.end();)
+		{
+			if (iter->get()->IsPendingDestroy())
+			{
+				iter = m_Actors.erase(iter);
+			}
+			else
+			{
+				++iter;
+			}
+		}
+
+
 	}
 
 	World::~World()
