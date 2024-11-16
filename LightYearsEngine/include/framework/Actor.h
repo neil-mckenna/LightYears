@@ -44,6 +44,12 @@ namespace ly
 
 		Vector2f GetActorSpriteSize() const;
 
+		// new functions
+		void SetSpriteRotation(float newRot);
+		float GetSpriteRotation() const;
+
+		World* GetWorld() const { return m_owningWorld; }
+
 		// destructor
 		virtual ~Actor();
 
@@ -51,6 +57,7 @@ namespace ly
 		World* m_owningWorld;
 		bool m_hasBeganPlay;
 
+		float m_ActorRotation = 0.0f;
 		Sprite m_Sprite;
 		shared<Texture> m_Texture;
 

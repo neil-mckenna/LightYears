@@ -81,7 +81,7 @@ namespace ly
 
 	void Actor::SetActorRotation(const float newRot)
 	{
-		m_Sprite.setRotation(newRot);
+		m_ActorRotation = newRot;
 	}
 
 	Vector2f Actor::GetActorLocation() const
@@ -91,7 +91,7 @@ namespace ly
 
 	float Actor::GetActorRotation() const
 	{
-		return m_Sprite.getRotation();
+		return m_ActorRotation;
 	}
 
 	void Actor::AddActorLocationOffset(const Vector2f& offsetAmt)
@@ -132,6 +132,16 @@ namespace ly
 
 		return Vector2f(width, height);
 	}
+
+	void Actor::SetSpriteRotation(float newRot) {
+		m_Sprite.setRotation(newRot); // Rotate the sprite independently
+	}
+
+	float Actor::GetSpriteRotation() const {
+		return m_Sprite.getRotation(); // Get the current sprite rotation
+	}
+
+
 
 	void Actor::CenterPivot()
 	{

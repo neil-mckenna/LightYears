@@ -21,8 +21,8 @@ namespace ly
 		// destructor
 		virtual ~World();
 
-		template<typename ActorType>
-		shared<ActorType> SpawnActor();
+		template<typename ActorType, typename... Args>
+		shared<ActorType> SpawnActor(Args... args);
 
 		Vector2u GetWindowSize() const;
 
@@ -38,11 +38,11 @@ namespace ly
 
 	};
 
-	template<typename ActorType>
-	shared<ActorType> World::SpawnActor()
+	template<typename ActorType, typename... Args>
+	shared<ActorType> World::SpawnActor(Args... args)
 	{
 		// Create a new shared pointer of ActorType and initialize it with this world as the owner
-		shared<ActorType> newActor = std::make_shared<ActorType>(this);
+		shared<ActorType> newActor = std::make_shared<ActorType>(this, args...);
 
 		// Add the new actor to the pending actors list
 		m_pendingActors.push_back(newActor);

@@ -7,13 +7,19 @@ message(STATUS "CMake version: ${CMAKE_VERSION}")
 # Define the game executable
 message(STATUS "Creating executable for ${LIGHT_YEARS_GAME_TARGET_NAME}")
 add_executable(${LIGHT_YEARS_GAME_TARGET_NAME}
+    ${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
     ${CMAKE_CURRENT_SOURCE_DIR}/include/gameFramework/GameApplication.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/gameFramework/GameApplication.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
     ${CMAKE_CURRENT_SOURCE_DIR}/include/spaceship/Spaceship.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/spaceship/Spaceship.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/player/PlayerSpaceship.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/player/PlayerSpaceship.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Shooter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Shooter.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/BulletShooter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/BulletShooter.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Bullet.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Bullet.cpp
 
 )
 

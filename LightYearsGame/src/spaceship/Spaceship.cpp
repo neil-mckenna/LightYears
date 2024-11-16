@@ -21,5 +21,10 @@ namespace ly
 	{
 		m_Velocity = newVelocity;
 	}
+
+	void SpaceShip::Shoot()
+	{
+
+	}
 }
 
