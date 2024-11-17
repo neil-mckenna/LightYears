@@ -1,9 +1,9 @@
 #include <iostream>
 #include "framework/Application.h"
-
 #include "framework/Core.h"
 #include "framework/World.h"
 #include "framework/AssetManager.h"
+#include "framework/PhysicsSystem.h"
 
 
 using namespace sf;
@@ -85,6 +85,11 @@ namespace ly
 		{
 			LOG("No current world");
 		}
+
+		// physics update
+		PhysicsSystem::Get().Step(dt);
+
+
 
 		if (m_CleanCycleClock.getElapsedTime().asSeconds() >= m_CleanCycleInterval)
 		{
