@@ -211,7 +211,8 @@ namespace ly
 	{
 		if (m_PhysicsBody)
 		{
-			m_PhysicsBody = PhysicsSystem::Get().RemoveListener(this);
+			PhysicsSystem::Get().RemoveListener(m_PhysicsBody);
+			m_PhysicsBody = nullptr;
 		}
 	}
 
@@ -241,6 +242,12 @@ namespace ly
 	{
 		LOG("Overlap Ended");
 
+	}
+
+	void Actor::Destroy()
+	{
+		UninitializePhysics();
+		Object::Destroy();
 	}
 
 	Actor::~Actor()

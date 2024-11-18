@@ -23,20 +23,38 @@ namespace ly
 		return *physicsSystem;
 	}
 
+	void PhysicsSystem::Cleanup()
+	{
+		physicsSystem = move(unique<PhysicsSystem>{new PhysicsSystem});
+	}
+
 	// constructor no gravity with cm scale
 	PhysicsSystem::PhysicsSystem() :
 		m_PhysicsWorld{ b2Vec2{0.f, 0.f} },
 		m_PhysicsScale{ 0.01f },
 		m_VelocityIterations{ 8 },
 		m_PositionIterations{ 3 },
-		m_ContactListener{}
+		m_ContactListener{},
+		m_PendingRemovalListeners{}
 	{
 		m_PhysicsWorld.SetContactListener(&m_ContactListener);
 		m_PhysicsWorld.SetAllowSleeping(false);
 	}
 
+	void PhysicsSystem::ProcessPendingRemovalListeners()
+	{
+		for (auto listener : m_PendingRemovalListeners)
+		{
+			m_PhysicsWorld.DestroyBody(listener);
+		}
+
+		m_PendingRemovalListeners.clear();
+	}
+
 	void PhysicsSystem::Step(float dt)
 	{
+		ProcessPendingRemovalListeners();
+
 		m_PhysicsWorld.Step(
 			dt,
 			m_VelocityIterations,
@@ -84,9 +102,9 @@ namespace ly
 		return body;
 	}
 
-	b2Body* PhysicsSystem::RemoveListener(Actor* bodyToRemove)
+	void PhysicsSystem::RemoveListener(b2Body* bodyToRemove)
 	{
-		return nullptr;
+		m_PendingRemovalListeners.insert(bodyToRemove);
 	}
 
 

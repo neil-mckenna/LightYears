@@ -20,9 +20,11 @@ namespace ly
 		void Step(float dt);
 
 		b2Body* AddListener(Actor* listener);
-		b2Body* RemoveListener(Actor* bodyToRemove);
+		void RemoveListener(b2Body* bodyToRemove);
 
 		float GetPhysicsScale() const { return m_PhysicsScale; }
+
+		static void Cleanup();
 
 	protected:
 		PhysicsSystem();
@@ -36,7 +38,9 @@ namespace ly
 
 		PhysicsContactListener m_ContactListener;
 
+		Set<b2Body*> m_PendingRemovalListeners;
 
+		void ProcessPendingRemovalListeners();
 	};
 
 

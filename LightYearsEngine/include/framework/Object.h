@@ -7,7 +7,7 @@ namespace ly
 	public:
 		Object();
 
-		void Destroy();
+		virtual void Destroy();
 		bool IsPendingDestroy() const { return m_isPendingDestroy; }
 
 

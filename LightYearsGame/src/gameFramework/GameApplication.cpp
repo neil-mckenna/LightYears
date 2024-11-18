@@ -48,9 +48,7 @@ namespace ly
 		testSpaceShip.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
 		testSpaceShip.lock()->SetActorLocation(Vector2f(100.f, 50.f));
 
-
-
-		counter = 0;
+		counter = 0.f;
 
 	}
 
@@ -61,14 +59,13 @@ namespace ly
 		//LOG("GAME APPlication updating counter: %f", counter);
 
 
-		/*if (counter > 2.f)
+		if (counter > 10.f)
 		{
-			if (!actorToDestroy.expired())
+			if (!testPlayerSpaceship.expired())
 			{
-				LOG("Destroy the actor");
-				actorToDestroy.lock()->Destroy();
+				testPlayerSpaceship.lock()->Destroy();
 			}
-		}*/
+		}
 	}
 
 

@@ -5,6 +5,7 @@
 #include <memory>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -27,6 +28,9 @@ using Map = map<keyType, valType, Pr>;
 
 template<typename keyType, typename valType, typename hasher = hash<keyType>>
 using Dictionary = unordered_map<keyType, valType, hasher>;
+
+template<typename T>
+using Set = unordered_set<T>;
 
 
 // macro
