@@ -20,7 +20,6 @@ namespace ly
 
 		LOG("GAME APPlication called");
 		weak<World> newWorld = LoadWorld<World>();
-		//newWorld.lock()->SpawnActor<Actor>();
 
 		testPlayerSpaceship = newWorld.lock()->SpawnActor<PlayerSpaceship>();
 		testPlayerSpaceship.lock()->SetActorLocation(Vector2f(400.f, 800.f));
@@ -42,6 +41,14 @@ namespace ly
 
 		//testPlayerSpaceship.lock()->SetActorRotation(0.0f);
 		//testPlayerSpaceship.lock()->RescaleActor(1.0f, 1.0f);
+
+		weak<SpaceShip> testSpaceShip =
+			newWorld.lock()->SpawnActor<SpaceShip>();
+
+		testSpaceShip.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
+		testSpaceShip.lock()->SetActorLocation(Vector2f(100.f, 50.f));
+
+
 
 		counter = 0;
 

@@ -21,7 +21,7 @@ namespace ly
 		void SetDamage(float newDamage);
 
 		virtual void Update(float dt) override;
-
+		virtual void BeginPlay() override;
 	private:
 		Actor* m_Owner;
 		float m_Speed;

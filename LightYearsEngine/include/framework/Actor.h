@@ -3,9 +3,12 @@
 #include "framework/Object.h"
 #include "framework/Core.h"
 #include <SFML/Graphics.hpp>
+#include <box2d/b2_body.h>
 
 using namespace std;
 using namespace sf;
+
+class b2Body;
 
 namespace ly
 {
@@ -54,6 +57,11 @@ namespace ly
 
 		bool IsActorOutOfWindowBounds() const;
 
+		bool SetEnablePhysics(bool enable);
+
+		virtual void OnActorBeginOverlap(Actor* other);
+		virtual void OnActorEndOverlap(Actor* other);
+
 		// destructor
 		virtual ~Actor();
 
@@ -61,13 +69,18 @@ namespace ly
 		World* m_owningWorld;
 		bool m_hasBeganPlay;
 
+		bool m_PhysicsEnabled;
 
 
 		float m_ActorRotation = 0.0f;
 		Sprite m_Sprite;
 		shared<Texture> m_Texture;
+		b2Body* m_PhysicsBody;
 
 		void CenterPivot();
+		void InitializePhysics();
+		void UninitializePhysics();
+		void UpdatePhysicsBodyTransform();
 	};
 
 

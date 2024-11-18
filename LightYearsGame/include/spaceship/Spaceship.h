@@ -16,6 +16,7 @@ namespace ly
 		void SetVelocity(const Vector2f& newVelocity);
 		Vector2f GetVelocity() const { return m_Velocity; }
 		virtual void Shoot();
+		virtual void BeginPlay() override;
 
 	private:
 		Vector2f m_Velocity;

@@ -4,6 +4,7 @@
 #include <box2d/b2_body.h>
 #include <box2d/b2_polygon_shape.h>
 #include <box2d/b2_fixture.h>
+#include <box2d/b2_contact.h>
 
 
 using namespace std;
@@ -27,9 +28,11 @@ namespace ly
 		m_PhysicsWorld{ b2Vec2{0.f, 0.f} },
 		m_PhysicsScale{ 0.01f },
 		m_VelocityIterations{ 8 },
-		m_PositionIterations{ 3 }
+		m_PositionIterations{ 3 },
+		m_ContactListener{}
 	{
-
+		m_PhysicsWorld.SetContactListener(&m_ContactListener);
+		m_PhysicsWorld.SetAllowSleeping(false);
 	}
 
 	void PhysicsSystem::Step(float dt)
@@ -81,5 +84,61 @@ namespace ly
 		return body;
 	}
 
+	b2Body* PhysicsSystem::RemoveListener(Actor* bodyToRemove)
+	{
+		return nullptr;
+	}
+
+
+	void PhysicsContactListener::BeginContact(b2Contact* contact)
+	{
+		LOG("Contact");
+		Actor* ActorA =
+			reinterpret_cast<Actor*>(contact->GetFixtureA()->GetBody()->GetUserData().pointer);
+		Actor* ActorB =
+			reinterpret_cast<Actor*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer);
+
+		if (ActorA && !ActorA->IsPendingDestroy())
+		{
+			ActorA->OnActorBeginOverlap(ActorB);
+		}
+
+		if (ActorB && !ActorB->IsPendingDestroy())
+		{
+			ActorB->OnActorBeginOverlap(ActorA);
+		}
+
+	}
+
+	void PhysicsContactListener::EndContact(b2Contact* contact)
+	{
+		LOG("End Contact");
+		Actor* ActorA = nullptr;
+		Actor* ActorB = nullptr;
+
+		if (contact->GetFixtureA() && contact->GetFixtureB()->GetBody())
+		{
+			ActorA =
+				reinterpret_cast<Actor*>(contact->GetFixtureA()->GetBody()->GetUserData().pointer);
+		}
+
+		if (contact->GetFixtureB() && contact->GetFixtureA()->GetBody())
+		{
+			ActorB =
+				reinterpret_cast<Actor*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer);
+		}
+
+		if (ActorA && !ActorA->IsPendingDestroy())
+		{
+			ActorA->OnActorEndOverlap(ActorB);
+		}
+
+		if (ActorB && !ActorB->IsPendingDestroy())
+		{
+			ActorB->OnActorEndOverlap(ActorA);
+		}
+
+
+	}
 
 }
