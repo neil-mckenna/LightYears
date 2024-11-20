@@ -9,7 +9,7 @@ using namespace sf;
 
 namespace ly
 {
-	PlayerSpaceship::PlayerSpaceship(World* owningWorld, const string& path)
+	PlayerSpaceShip::PlayerSpaceShip(World* owningWorld, const string& path)
 		:
 		SpaceShip{owningWorld, path},
 		m_MoveInput{0.0f, 0.0f},
@@ -18,7 +18,7 @@ namespace ly
 	{
 	}
 
-	void PlayerSpaceship::Update(float dt)
+	void PlayerSpaceShip::Update(float dt)
 	{
 		SpaceShip::Update(dt);
 		HandleInput();
@@ -26,7 +26,7 @@ namespace ly
 		ConsumeInput(dt);
 	}
 
-	void PlayerSpaceship::Shoot()
+	void PlayerSpaceShip::Shoot()
 	{
 		if (m_Shooter)
 		{
@@ -34,7 +34,7 @@ namespace ly
 		}
 	}
 
-	void PlayerSpaceship::HandleInput()
+	void PlayerSpaceShip::HandleInput()
 	{
 		// up and down
 		if (Keyboard::isKeyPressed(Keyboard::W))
@@ -66,13 +66,13 @@ namespace ly
 
 	}
 
-	void PlayerSpaceship::NormalizeInput()
+	void PlayerSpaceShip::NormalizeInput()
 	{
 		Normalize(m_MoveInput);
 		//LOG("move input is now %f, %f", m_MoveInput.x, m_MoveInput.y);
 	}
 
-	void PlayerSpaceship::ClampInputOnEdge()
+	void PlayerSpaceShip::ClampInputOnEdge()
 	{
 		Vector2f actorLocation = GetActorLocation();
 
@@ -105,7 +105,7 @@ namespace ly
 
 	}
 
-	void PlayerSpaceship::ConsumeInput(float dt)
+	void PlayerSpaceShip::ConsumeInput(float dt)
 	{
 		SetVelocity(m_MoveInput * m_speed);
 		m_MoveInput.x = 0.f;

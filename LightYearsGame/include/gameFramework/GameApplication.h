@@ -8,7 +8,9 @@
 namespace ly
 {
 	class Actor;
-	class PlayerSpaceship;
+	class PlayerSpaceShip;
+	class SpaceShip;
+
 	class GameApplication : public Application
 	{
 	public:
@@ -16,7 +18,8 @@ namespace ly
 		void Update(float dt) override;
 	private:
 		float counter;
-		weak<PlayerSpaceship> testPlayerSpaceship;
+		shared<PlayerSpaceShip> testPlayerSpaceship;
+		shared<SpaceShip> testSpaceship_2;
 	};
 
 }

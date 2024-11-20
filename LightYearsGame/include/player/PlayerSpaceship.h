@@ -9,10 +9,10 @@ using namespace std;
 namespace ly
 {
 	class BulletShooter;
-	class PlayerSpaceship : public SpaceShip
+	class PlayerSpaceShip : public SpaceShip
 	{
 	public:
-		PlayerSpaceship(World* owningWorld, const string& path = "SpaceShooterRedux/PNG/playerShip1_blue.png");
+		PlayerSpaceShip(World* owningWorld = nullptr, const string& texturePath = "");
 		virtual void Update(float dt);
 
 		float GetSpeed() const { return m_speed; }

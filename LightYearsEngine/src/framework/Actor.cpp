@@ -23,6 +23,9 @@ namespace ly
 
 	void Actor::SetTexture(const string texturePath)
 	{
+		// early return to protect constructor
+		if (texturePath == "") { return; }
+
 		// call singleton
 		m_Texture = AssetManager::Get().LoadTexture(texturePath);
 

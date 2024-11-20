@@ -22,7 +22,7 @@ namespace ly
 		void Run();
 
 		template<typename WorldType>
-		weak<WorldType> LoadWorld();
+		shared<WorldType> LoadWorld();
 
 		Vector2u GetWindowSize() const
 		{
@@ -52,7 +52,7 @@ namespace ly
 	};
 
 	template<typename WorldType>
-	std::weak_ptr<WorldType> Application::LoadWorld()
+	shared<WorldType> Application::LoadWorld()
 	{
 		LOG("Attempting to load world of type WorldType");
 
